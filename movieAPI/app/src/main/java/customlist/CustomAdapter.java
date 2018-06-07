@@ -1,4 +1,4 @@
-package com.example.alialzantot.movieapi;
+package customlist;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,8 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+
+import com.example.alialzantot.movieapi.R;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
+import jsonretrofit.beans.Result;
 
 /**
  * Created by Ali Alzantot on 07/06/2018.
@@ -16,9 +21,12 @@ import android.widget.TextView;
 
 public class CustomAdapter extends ArrayAdapter {
 
-    Person[]persons;
+
+
+    private List<Result> persons;
+
     Context myConext;
-    public CustomAdapter(@NonNull Context context, int layout, int resource, @NonNull Person[] objects) {
+    public CustomAdapter(@NonNull Context context, int layout, int resource, @NonNull List<Result> objects) {
         super(context,layout, resource, objects);
         persons=objects;
         myConext=context;
@@ -42,8 +50,9 @@ public class CustomAdapter extends ArrayAdapter {
             viewHolder=(ViewHolder)rowView.getTag();
         }
 
-        viewHolder.getName().setText(persons[position].getName());
-        viewHolder.getImg().setImageResource(R.mipmap.temp);
+        viewHolder.getName().setText(persons.get(position).getName());
+
+        Picasso.with(myConext).load("http://image.tmdb.org/t/p/w200/"+persons.get(position).getProfilePath()).into(viewHolder.getImg());
 
 
         return rowView;

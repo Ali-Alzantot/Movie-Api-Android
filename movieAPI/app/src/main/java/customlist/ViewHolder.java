@@ -1,8 +1,10 @@
-package com.example.alialzantot.movieapi;
+package customlist;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.alialzantot.movieapi.R;
 
 /**
  * Created by Ali Alzantot on 07/06/2018.

@@ -1,4 +1,4 @@
-package com.example.alialzantot.movieapi;
+package customlist;
 
 /**
  * Created by Ali Alzantot on 07/06/2018.
