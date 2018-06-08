@@ -1,6 +1,7 @@
 package com.example.alialzantot.gridview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.alialzantot.R;
 
+import com.example.alialzantot.details.SingeImageView;
 import com.example.alialzantot.retrofit.beans.Profile;
 import com.squareup.picasso.Picasso;
 
@@ -67,7 +69,10 @@ public class GridViewCustomAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(context, "You Clicked "+personImages.get(position).getFilePath(), Toast.LENGTH_LONG).show();
+                Intent singleImageIntent=new Intent(context, SingeImageView.class);
+                singleImageIntent.putExtra("imgPath",personImages.get(position).getFilePath());
+                context.startActivity(singleImageIntent);
+
 
             }
         });
