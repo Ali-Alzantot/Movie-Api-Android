@@ -1,6 +1,6 @@
-package jsonretrofit.helper;
+package com.example.alialzantot.retrofit.helper;
 
-import jsonretrofit.api.ApiService;
+import com.example.alialzantot.retrofit.api.ApiService;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    tools:context="com.example.alialzantot.details.PersonDetailsActivity">
+
+
+    <ImageView
+        android:id="@+id/profileImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:layout_toEndOf="@+id/textView8"
+        android:layout_toRightOf="@+id/textView8"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/profileImg"
+        android:layout_marginLeft="57dp"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="57dp"
+        android:text="name"
+        android:textColor="#00F" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView7"
+        android:layout_alignStart="@+id/textView7"
+        android:layout_below="@+id/textView7"
+        android:layout_marginTop="39dp"
+        android:text="Birth day"
+        android:textColor="#00F" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView8"
+        android:layout_alignStart="@+id/textView8"
+        android:layout_below="@+id/textView8"
+        android:layout_marginTop="46dp"
+        android:text="place of birth"
+        android:textColor="#00F" />
+
+    <TextView
+        android:id="@+id/nameTF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView7"
+        android:layout_alignBottom="@+id/textView7"
+        android:layout_alignLeft="@+id/birthDayTF"
+        android:layout_alignStart="@+id/birthDayTF"
+        android:text="TextView"
+        android:textColor="#FFF" />
+
+    <TextView
+        android:id="@+id/birthDayTF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView8"
+        android:layout_alignBottom="@+id/textView8"
+        android:layout_alignLeft="@+id/placeOfBirthTF"
+        android:layout_alignStart="@+id/placeOfBirthTF"
+        android:text="TextView"
+        android:textColor="#FFF" />
+
+    <TextView
+        android:id="@+id/placeOfBirthTF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView9"
+        android:layout_alignBottom="@+id/textView9"
+        android:layout_marginLeft="42dp"
+        android:layout_marginStart="42dp"
+        android:layout_toEndOf="@+id/textView9"
+        android:layout_toRightOf="@+id/textView9"
+        android:text="TextView"
+        android:textColor="#FFF" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/placeOfBirthTF"
+        android:layout_marginTop="27dp"
+        android:layout_toLeftOf="@+id/birthDayTF"
+        android:layout_toStartOf="@+id/birthDayTF"
+        android:text="BIO"
+        android:textColor="#00F" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView13"
+        android:layout_marginTop="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/bioTF"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView13"
+                android:layout_marginTop="27dp"
+                android:gravity="left"
+                android:lines="50"
+                android:maxLines="50"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                android:textColor="#FFF"></TextView>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/showPersonImagesButton"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_above="@+id/nameTF"
+        android:layout_marginBottom="12dp"
+        android:layout_toEndOf="@+id/textView9"
+        android:layout_toRightOf="@+id/textView9"
+        android:background="#FFF"
+        android:text="Images"
+        android:textColor="#00F" />
+
+</RelativeLayout>

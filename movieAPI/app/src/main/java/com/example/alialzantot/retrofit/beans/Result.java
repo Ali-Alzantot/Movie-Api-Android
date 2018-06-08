@@ -1,11 +1,9 @@
 
-package jsonretrofit.beans;
+package com.example.alialzantot.retrofit.beans;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import jsonretrofit.beans.KnownFor;
 
 public class Result {
 

@@ -1,10 +1,10 @@
-package customlist;
+package com.example.alialzantot.customlist;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.alialzantot.movieapi.R;
+import com.example.alialzantot.R;
 
 /**
  * Created by Ali Alzantot on 07/06/2018.

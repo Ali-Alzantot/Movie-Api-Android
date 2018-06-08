@@ -1,4 +1,4 @@
-package customlist;
+package com.example.alialzantot.customlist;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import com.example.alialzantot.movieapi.R;
+import com.example.alialzantot.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import jsonretrofit.beans.Result;
+import com.example.alialzantot.retrofit.beans.Result;
 
 /**
  * Created by Ali Alzantot on 07/06/2018.

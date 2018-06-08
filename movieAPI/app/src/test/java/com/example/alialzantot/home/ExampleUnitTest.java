@@ -1,4 +1,4 @@
-package com.example.alialzantot.movieapi;
+package com.example.alialzantot.home;
 
 import org.junit.Test;
 

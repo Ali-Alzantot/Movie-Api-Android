@@ -1,21 +1,23 @@
-package com.example.alialzantot.movieapi;
+package com.example.alialzantot.home;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import customlist.CustomAdapter;
-import customlist.Person;
-import jsonretrofit.api.ApiService;
-import jsonretrofit.beans.PopularPeoplePojo;
-import jsonretrofit.beans.Result;
-import jsonretrofit.helper.RetroClient;
+import com.example.alialzantot.R;
+import com.example.alialzantot.customlist.*;
+
+import com.example.alialzantot.details.PersonDetailsActivity;
+import com.example.alialzantot.retrofit.api.ApiService;
+import com.example.alialzantot.retrofit.beans.PopularPeoplePojo;
+import com.example.alialzantot.retrofit.beans.Result;
+import com.example.alialzantot.retrofit.helper.RetroClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -86,7 +88,10 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                System.out.println(persons.get(i).getName());
+
+                Intent detailsIntent=new Intent(getApplicationContext(), PersonDetailsActivity.class);
+                detailsIntent.putExtra("personId",persons.get(i).getId()+"");
+                startActivity(detailsIntent);
             }
         });
 
