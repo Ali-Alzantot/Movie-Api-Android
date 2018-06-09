@@ -179,7 +179,7 @@ public class SingeImageView extends AppCompatActivity implements ActivityCompat.
 
                         {
 
-                            Toast.makeText(getApplicationContext(),"photo saved to this device",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"photo saved to this device check your gallery",Toast.LENGTH_LONG).show();
                         }
 
                     });
