@@ -19,6 +19,10 @@ public interface ApiService {
     @GET("/3/person/popular?api_key=fc3140c227807880f6ba2c7bce9d1cb5&language=en-US")
     Call<PopularPeoplePojo> getMyJSON(@Query("page") int page);
 
+
+    @GET("/3/search/person?api_key=fc3140c227807880f6ba2c7bce9d1cb5&search_type=ngram")
+    Call<PopularPeoplePojo> getSearchResult(@Query("query") String query,@Query("page") int page);
+
     @GET("/3/person/{personId}?api_key=fc3140c227807880f6ba2c7bce9d1cb5&language=en-US")
     Call<PersonDetails> getPersonDetails(@Path("personId") int personId);
 

@@ -1,6 +1,7 @@
 package com.example.alialzantot.details;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -14,7 +15,6 @@ import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -63,7 +63,7 @@ public class SingeImageView extends AppCompatActivity implements ActivityCompat.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.my_custom_menu, menu);
+        inflater.inflate(R.menu.save_image_menu, menu);
         return true;
     }
 
@@ -103,8 +103,6 @@ public class SingeImageView extends AppCompatActivity implements ActivityCompat.
 
                 fos.close();
                 Toast.makeText(getApplicationContext(),"photo saved to this device @ imageDir",Toast.LENGTH_LONG).show();
-
-
 
             } catch (IOException e) {
 
@@ -148,7 +146,7 @@ public class SingeImageView extends AppCompatActivity implements ActivityCompat.
         if (isExternalStorageWritable()) {
             saveImage(imageBitmap);
         }else{
-            //prompt the user or do something
+            saveToInternalStorage(bitmap);
         }
     }
 
@@ -179,10 +177,16 @@ public class SingeImageView extends AppCompatActivity implements ActivityCompat.
 
                         {
 
-                            Toast.makeText(getApplicationContext(),"photo saved to this device check your gallery",Toast.LENGTH_LONG).show();
+                        SingeImageView.this.runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(getApplicationContext(),"photo saved to this device check your gallery",Toast.LENGTH_LONG).show();
+                            }
+                        });
+
                         }
 
                     });
+
             out.close();
         } catch (Exception e) {
             e.printStackTrace();

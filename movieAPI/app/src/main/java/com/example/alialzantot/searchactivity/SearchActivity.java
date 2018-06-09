@@ -1,5 +1,6 @@
-package com.example.alialzantot.home;
+package com.example.alialzantot.searchactivity;
 
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,43 +10,47 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
-import java.util.List;
-
 import com.example.alialzantot.R;
-import com.example.alialzantot.customlist.*;
-
+import com.example.alialzantot.customlist.CustomAdapter;
+import com.example.alialzantot.customlist.EndlessScrollListener;
 import com.example.alialzantot.details.PersonDetailsActivity;
+import com.example.alialzantot.home.MainActivity;
 import com.example.alialzantot.retrofit.api.ApiService;
 import com.example.alialzantot.retrofit.beans.PopularPeoplePojo;
 import com.example.alialzantot.retrofit.beans.Result;
 import com.example.alialzantot.retrofit.helper.RetroClient;
-import com.example.alialzantot.searchactivity.SearchActivity;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity {
     private PopularPeoplePojo popularPeoplePojo;
     private List<Result> persons;
     private ProgressDialog pDialog;
     ListView listView;
     CustomAdapter customAdapter;
+    String searchQuery;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_search);
 
-        listView = findViewById(R.id.myList);
+        Intent getDataIntent=getIntent();
+        searchQuery=getDataIntent.getStringExtra("query");
 
-        pDialog = new ProgressDialog(MainActivity.this);
+
+        listView = findViewById(R.id.searchList);
+
+        pDialog = new ProgressDialog(SearchActivity.this);
         pDialog.setMessage("Loading Data.. Please wait...");
         pDialog.setIndeterminate(false);
         pDialog.setCancelable(false);
@@ -57,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Calling JSON
          */
-        Call<PopularPeoplePojo> call = api.getMyJSON(1);
+        Call<PopularPeoplePojo> call = api.getSearchResult(searchQuery,1);
 
         /**
          * Enqueue Callback will be call when get response...
@@ -78,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                     popularPeoplePojo = response.body();
                     persons = popularPeoplePojo.getResults();
 
-                     customAdapter = new CustomAdapter(MainActivity.this, R.layout.single_row, R.id.name, persons);
+                    customAdapter = new CustomAdapter(SearchActivity.this, R.layout.single_row, R.id.name, persons);
 
                     listView.setAdapter(customAdapter);
                 }
@@ -113,9 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 return true; // ONLY if more data is actually being loaded; false otherwise.
             }
         });
-
     }
-
 
 
     @Override
@@ -123,14 +126,63 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.search_menu, menu);
         MenuItem searchItem=menu.findItem(R.id.serachMenuItem);
-         final SearchView searchView=(SearchView) searchItem.getActionView();
+        final SearchView searchView=(SearchView) searchItem.getActionView();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                Intent searchIntent = new Intent(getApplicationContext(), SearchActivity.class);
-                searchIntent.putExtra("query", s);
-                startActivity(searchIntent);
+                SearchActivity.this.searchQuery=s;
+                persons.clear();
+                customAdapter.clear();
+
+
+                pDialog = new ProgressDialog(SearchActivity.this);
+                pDialog.setMessage("Loading Data.. Please wait...");
+                pDialog.setIndeterminate(false);
+                pDialog.setCancelable(false);
+                pDialog.show();
+
+                //Creating an object of our api interface
+                ApiService api = RetroClient.getApiService();
+
+                /**
+                 * Calling JSON
+                 */
+                Call<PopularPeoplePojo> call = api.getSearchResult(searchQuery,1);
+
+                /**
+                 * Enqueue Callback will be call when get response...
+                 */
+                call.enqueue(new Callback<PopularPeoplePojo>() {
+                    @Override
+                    public void onResponse(Call<PopularPeoplePojo> call, Response<PopularPeoplePojo> response) {
+
+
+                        if (response.isSuccessful()) {
+                            /**
+                             * Got Successfully
+                             */
+
+                            //Dismiss Dialog
+                            pDialog.dismiss();
+
+                            popularPeoplePojo = response.body();
+                            persons = popularPeoplePojo.getResults();
+
+                            customAdapter.addAll(persons);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<PopularPeoplePojo> call, Throwable t) {
+                        //persons=new ArrayList<Result>();
+                        pDialog.dismiss();
+                    }
+                });
+
+
+
+
                 searchView.clearFocus();
                 return true;
             }
@@ -153,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        pDialog = new ProgressDialog(MainActivity.this);
+        pDialog = new ProgressDialog(SearchActivity.this);
         pDialog.setMessage("Loading Data.. Please wait...");
         pDialog.setIndeterminate(false);
         pDialog.setCancelable(false);
@@ -165,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Calling JSON
          */
-        Call<PopularPeoplePojo> call = api.getMyJSON(pageIndex);
+        Call<PopularPeoplePojo> call = api.getSearchResult(searchQuery,pageIndex);
 
         /**
          * Enqueue Callback will be call when get response...
@@ -199,5 +251,4 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
 }
