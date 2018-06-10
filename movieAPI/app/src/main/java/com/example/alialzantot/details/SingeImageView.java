@@ -1,7 +1,6 @@
 package com.example.alialzantot.details;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -38,13 +37,13 @@ public class SingeImageView extends AppCompatActivity implements ActivityCompat.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_singe_image_view);
+        setContentView(R.layout.activity_single_image_view);
 
         Intent getDataIntent=getIntent();
         imgPath=getDataIntent.getStringExtra("imgPath");
         singleImage=findViewById(R.id.singleImage);
 
-        Picasso.with(getApplicationContext()).load("http://image.tmdb.org/t/p/original/"+imgPath).into(singleImage, new com.squareup.picasso.Callback() {
+        Picasso.with(getApplicationContext()).load("http://image.tmdb.org/t/p/original/"+imgPath).placeholder(R.drawable.loading).error(R.drawable.error).into(singleImage, new com.squareup.picasso.Callback() {
             @Override
             public void onSuccess() {
                 imageBitmap= ((BitmapDrawable)singleImage.getDrawable()).getBitmap();

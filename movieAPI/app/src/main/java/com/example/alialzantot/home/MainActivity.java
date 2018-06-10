@@ -2,17 +2,18 @@ package com.example.alialzantot.home;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -124,6 +125,24 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.search_menu, menu);
         MenuItem searchItem=menu.findItem(R.id.serachMenuItem);
          final SearchView searchView=(SearchView) searchItem.getActionView();
+
+         //change search icon color
+        int searchIconId = searchView.getContext().getResources().getIdentifier("android:id/search_button",null, null);
+        ImageView searchIcon = (ImageView) searchView.findViewById(searchIconId);
+        searchIcon.setImageResource(R.drawable.ic_search_white_24dp);
+
+        //change search icon text color
+        searchView.setQueryHint("Type search name...");
+        int searchPlateId = searchView.getContext().getResources().getIdentifier("android:id/search_plate", null, null);
+        View searchPlate = searchView.findViewById(searchPlateId);
+        if (searchPlate!=null) {
+            int searchTextId = searchPlate.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+            TextView searchText = (TextView) searchPlate.findViewById(searchTextId);
+            if (searchText!=null) {
+                searchText.setTextColor(Color.BLACK);
+                searchText.setHintTextColor(Color.BLACK);
+            }
+        }
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

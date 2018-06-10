@@ -91,7 +91,7 @@ public class PersonDetailsActivity extends AppCompatActivity {
                     placeOfBirthTextView.setText(personDetails.getPlaceOfBirth());
                     birthDayTextView.setText(personDetails.getBirthday());
                     bioTextView.setText(personDetails.getBiography());
-                    Picasso.with(PersonDetailsActivity.this).load("http://image.tmdb.org/t/p/w300/"+personDetails.getProfilePath()).into(profileImage);
+                    Picasso.with(PersonDetailsActivity.this).load("http://image.tmdb.org/t/p/w300/"+personDetails.getProfilePath()).placeholder(R.drawable.loading).error(R.drawable.error).into(profileImage);
 
                 }
             }

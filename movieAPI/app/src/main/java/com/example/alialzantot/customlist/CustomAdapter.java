@@ -1,6 +1,7 @@
 package com.example.alialzantot.customlist;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -52,8 +53,7 @@ public class CustomAdapter extends ArrayAdapter {
 
         viewHolder.getName().setText(persons.get(position).getName());
 
-        Picasso.with(myConext).load("http://image.tmdb.org/t/p/w200/"+persons.get(position).getProfilePath()).into(viewHolder.getImg());
-
+        Picasso.with(myConext).load("http://image.tmdb.org/t/p/w200/"+persons.get(position).getProfilePath()).placeholder(R.drawable.loading).error(R.drawable.error).into(viewHolder.getImg());
 
         return rowView;
     }

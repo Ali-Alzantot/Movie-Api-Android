@@ -63,7 +63,7 @@ public class GridViewCustomAdapter extends BaseAdapter {
 
         holder.img = (ImageView) rowView.findViewById(R.id.gridPersonImg);
 
-        Picasso.with(context).load("http://image.tmdb.org/t/p/w500/"+personImages.get(position).getFilePath()).into(holder.img);
+        Picasso.with(context).load("http://image.tmdb.org/t/p/w500/"+personImages.get(position).getFilePath()).placeholder(R.drawable.loading).error(R.drawable.error).into(holder.img);
 
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
