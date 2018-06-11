@@ -22,10 +22,11 @@ import com.example.alialzantot.customlist.*;
 
 import com.example.alialzantot.details.PersonDetailsActivity;
 import com.example.alialzantot.retrofit.api.ApiService;
+import com.example.alialzantot.retrofit.beans.PersonResult;
 import com.example.alialzantot.retrofit.beans.PopularPeoplePojo;
-import com.example.alialzantot.retrofit.beans.Result;
 import com.example.alialzantot.retrofit.helper.RetroClient;
 import com.example.alialzantot.searchactivity.SearchActivity;
+import com.example.alialzantot.topmoviesactors.TopMoviesActors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,7 +34,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private PopularPeoplePojo popularPeoplePojo;
-    private List<Result> persons;
+    private List<PersonResult> persons;
     private ProgressDialog pDialog;
     ListView listView;
     CustomAdapter customAdapter;
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Calling JSON
          */
-        Call<PopularPeoplePojo> call = api.getMyJSON(1);
+        Call<PopularPeoplePojo> call = api.getPersonsJSON(1);
 
         /**
          * Enqueue Callback will be call when get response...
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     pDialog.dismiss();
 
                     popularPeoplePojo = response.body();
-                    persons = popularPeoplePojo.getResults();
+                    persons = popularPeoplePojo.getPersonResults();
 
                      customAdapter = new CustomAdapter(MainActivity.this, R.layout.single_row, R.id.name, persons);
 
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<PopularPeoplePojo> call, Throwable t) {
-                //persons=new ArrayList<Result>();
+                //persons=new ArrayList<PersonResult>();
                 pDialog.dismiss();
             }
         });
@@ -122,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.search_menu, menu);
+        inflater.inflate(R.menu.default_menu, menu);
         MenuItem searchItem=menu.findItem(R.id.serachMenuItem);
          final SearchView searchView=(SearchView) searchItem.getActionView();
 
@@ -166,6 +167,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.topMoviesActors:
+                Intent topMoviesIntent = new Intent(getApplicationContext(), TopMoviesActors.class);
+                startActivity(topMoviesIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
 
     public void loadNextDataFromApi(int pageIndex){
@@ -184,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Calling JSON
          */
-        Call<PopularPeoplePojo> call = api.getMyJSON(pageIndex);
+        Call<PopularPeoplePojo> call = api.getPersonsJSON(pageIndex);
 
         /**
          * Enqueue Callback will be call when get response...
@@ -203,15 +217,15 @@ public class MainActivity extends AppCompatActivity {
                     pDialog.dismiss();
 
                     popularPeoplePojo = response.body();
-                    persons.addAll(popularPeoplePojo.getResults());
+                    persons.addAll(popularPeoplePojo.getPersonResults());
 
-                    customAdapter.addAll(popularPeoplePojo.getResults());
+                    customAdapter.addAll(popularPeoplePojo.getPersonResults());
                 }
             }
 
             @Override
             public void onFailure(Call<PopularPeoplePojo> call, Throwable t) {
-                //persons=new ArrayList<Result>();
+                //persons=new ArrayList<PersonResult>();
                 pDialog.dismiss();
             }
         });

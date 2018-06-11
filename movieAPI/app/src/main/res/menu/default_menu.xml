@@ -11,4 +11,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="always"></item>
 
+    <item
+        android:id="@+id/topMoviesActors"
+        android:title="top movies actors "/>
+
 </menu>

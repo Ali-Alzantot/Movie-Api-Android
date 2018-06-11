@@ -2,11 +2,10 @@
 package com.example.alialzantot.retrofit.beans;
 
 import java.util.List;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PopularPeoplePojo {
+public class TopRatedMovies {
 
     @SerializedName("page")
     @Expose
@@ -19,7 +18,7 @@ public class PopularPeoplePojo {
     private Integer totalPages;
     @SerializedName("results")
     @Expose
-    private List<PersonResult> personResults = null;
+    private List<TopRatedMoviesResult> topRatedMoviesResults = null;
 
     public Integer getPage() {
         return page;
@@ -45,12 +44,12 @@ public class PopularPeoplePojo {
         this.totalPages = totalPages;
     }
 
-    public List<PersonResult> getPersonResults() {
-        return personResults;
+    public List<TopRatedMoviesResult> getTopRatedMoviesResults() {
+        return topRatedMoviesResults;
     }
 
-    public void setPersonResults(List<PersonResult> personResults) {
-        this.personResults = personResults;
+    public void setTopRatedMoviesResults(List<TopRatedMoviesResult> topRatedMoviesResults) {
+        this.topRatedMoviesResults = topRatedMoviesResults;
     }
 
 }

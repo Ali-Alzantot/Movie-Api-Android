@@ -1,8 +1,11 @@
 package com.example.alialzantot.retrofit.api;
 
+import com.example.alialzantot.retrofit.beans.MovieCast;
 import com.example.alialzantot.retrofit.beans.PersonDetails;
 import com.example.alialzantot.retrofit.beans.PersonImages;
 import com.example.alialzantot.retrofit.beans.PopularPeoplePojo;
+import com.example.alialzantot.retrofit.beans.TopRatedMovies;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -17,8 +20,14 @@ public interface ApiService {
 
 
     @GET("/3/person/popular?api_key=fc3140c227807880f6ba2c7bce9d1cb5&language=en-US")
-    Call<PopularPeoplePojo> getMyJSON(@Query("page") int page);
+    Call<PopularPeoplePojo> getPersonsJSON(@Query("page") int page);
 
+
+    @GET("/3/movie/top_rated?api_key=fc3140c227807880f6ba2c7bce9d1cb5")
+    Call<TopRatedMovies> getTopRatedMoviesJSON();
+
+    @GET("/3/movie/{id}/casts?api_key=fc3140c227807880f6ba2c7bce9d1cb5")
+    Call<MovieCast> getMovieCastJSON(@Path("id") int id);
 
     @GET("/3/search/person?api_key=fc3140c227807880f6ba2c7bce9d1cb5&search_type=ngram")
     Call<PopularPeoplePojo> getSearchResult(@Query("query") String query,@Query("page") int page);
@@ -28,5 +37,7 @@ public interface ApiService {
 
     @GET("3/person/{personId}/images?api_key=fc3140c227807880f6ba2c7bce9d1cb5")
     Call<PersonImages> getPersonImages(@Path("personId") int personId);
+
+
 
 }

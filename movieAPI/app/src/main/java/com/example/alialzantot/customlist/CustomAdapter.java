@@ -1,7 +1,6 @@
 package com.example.alialzantot.customlist;
 
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -10,11 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import com.example.alialzantot.R;
+import com.example.alialzantot.retrofit.beans.PersonResult;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-
-import com.example.alialzantot.retrofit.beans.Result;
 
 /**
  * Created by Ali Alzantot on 07/06/2018.
@@ -24,10 +22,10 @@ public class CustomAdapter extends ArrayAdapter {
 
 
 
-    private List<Result> persons;
+    private List<PersonResult> persons;
 
     Context myConext;
-    public CustomAdapter(@NonNull Context context, int layout, int resource, @NonNull List<Result> objects) {
+    public CustomAdapter(@NonNull Context context, int layout, int resource, @NonNull List<PersonResult> objects) {
         super(context,layout, resource, objects);
         persons=objects;
         myConext=context;
