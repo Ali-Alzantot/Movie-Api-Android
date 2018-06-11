@@ -160,7 +160,7 @@ public class TopMoviesActors extends AppCompatActivity {
                         for (int i=0;i<cast.size();++i){
                             int count=0;
                             for (int j=i+1;j<cast.size();++j){
-                                if(cast.get(i).getId()==cast.get(j).getId()) {
+                                if(cast.get(i).getName().equals(cast.get(j).getName())) {
                                     count++;
                                 }
                             }
